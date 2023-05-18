@@ -579,7 +579,7 @@ Using $m$ from the first step, we determine the number $s$ of query rounds via
 \end{enumerate}
 
 
-The following examples\footnotemark consider a situation is similar to the one in plonky2 \cite{PolygonZero}.
+The following examples\footnotemark consider a situation is similar to the one in Plonky2 \cite{PolygonZero}.
 \footnotetext{%
 In a previous version of the document the example parameters where based on linear batching of FRI. 
 The current ones consider algebraic batching.
@@ -596,18 +596,18 @@ For each blow-up factor we compute the proof size (assuming a hash size of $256$
 Each call of the hash processes another $r=256$ bits. 
 }
 
-\subsubsection{67 bits of security}
+\subsubsection{66 bits of security}
 
 
 Such a configuration might be still interesting in practice, as its security can be increased by \textit{grinding} (see \cite{ethSTARK}): 
-Another $13$ bits proof of work bound to the proof generation, and one obtains overall  $80$ bits of security. 
+Another $14$ bits proof of work bound to the proof generation, and one obtains overall  $80$ bits of security. 
 
 \begin{itemize}
 \item
 With a degree $2$ extension of $F_b$, hence a field size of $128$ bits, the best security level one can obtain for $\rho=2^{-5}$ is about $69$ bits. 
 The commit phase error is 
 \[
-\varepsilon_C\approx 2^{-68.21},
+\varepsilon_C\approx 2^{-67.21},
 \]
 with Johnson proximity $m=3$. 
 To have about the same soundness error in the query phase, we demand $s=29$ samples, yielding 
@@ -620,11 +620,11 @@ With a reduction strategy $\{a_1,a_2\}=\{2^4,2^3\}$ we obtain proof sizes of abo
 \hline
 $-\log_2(\rho)$ & $m$	& $s$	& $T$ in hashes 	& $|\pi|$ in bytes
 \\\hline\hline
-$3$ 	& $6$	& $50$	& $17.4$ k 	& $170.2$ k
+$3$ 	& $6$	& $49$	& $17.4$ k 	& $166.9$ k
 \\
-$4$ & $4$	& $38$	& $34.8$ k & $132.9$ k
+$4$ & $4$	& $37$	& $34.8$ k & $129.5$ k
 \\
-$5$ & $3$	& $30$	& $69.6$ k 	& $107$ k
+$5$ & $3$	& $30$	& $69.6$ k 	& $107.5$ k
 \\\hline
 \end{tabular}
 \end{center}
@@ -633,9 +633,9 @@ $5$ & $3$	& $30$	& $69.6$ k 	& $107$ k
 With a degree $3$ extension of $F_b$, hence a field size of $192$ bits, one can choose higher blow-up factors. 
 For  $\rho =2^{-6}$ we obtain $67$ bits security by  
 \[
-\varepsilon_C\approx 2^{-68.00},
+\varepsilon_C\approx 2^{-67.00},
 \]
-where the Johnson proximity is $m=1,487$. 
+where the Johnson proximity is $m=1,427$. 
 To have about the same soundness error in the query phase, we need only $s=23$ samples, yielding 
 \[
 \varepsilon_Q\approx 2^{-68.99}.
@@ -649,7 +649,7 @@ $-\log_2(\rho)$ & $m$	& $s$	& $T$ in hashes 	& $|\pi|$ in bytes
 \\\hline\hline
 $6$ 	& $1,427$	& $23$	& $209$ k 	& $88.9$ k
 \\
-$8$ & $713$	& $18$	& $836$ k & $72.4$ k
+$8$ & $713$	& $18$	& $836$ k & $68.4$ k
 \\
 $10$ & $356$	& $14$	& $3,342$ k 	& $58.4$ k
 \\\hline
@@ -723,7 +723,7 @@ Instead it is rather justified by ``\textit{[to the best of our knowledge...] no
 The authors consider the choice of $c_1=c_2=2$ reasonable, and for fields of characteristic $q>n$ they estimate that $c_1=c_2=1$. 
 %For characteristics $q<n$, a counter example from Appendix B of  \cite{DEEPFRI} contradicts the latter choice of constants.  
 
-The $c_1=c_2=1$ assumption is of particular interest for practitioners, as it yields proofs of halve the size as in the $c_1=c_2=2$ case. For example, it is used by the ethSTARK \cite{ethSTARK} (besides its provably secure parameter setting), as well as by plonky2 \cite{PolygonZero}.
+The $c_1=c_2=1$ assumption is of particular interest for practitioners, as it yields proofs of halve the size as in the $c_1=c_2=2$ case. For example, it is used by the ethSTARK \cite{ethSTARK} (besides its provably secure parameter setting), as well as by Plonky2 \cite{PolygonZero}.
 %, i.e. their standard recursive configuration, their high rate recursive configuration, as well as an even higher rate config for their final proofs). 
 
 
@@ -950,6 +950,10 @@ instead.
 %\end{align*}
 %which is a polynomial of degree $\leq m-1$.
 
+%%
+%% There seems something missing, when applied to the PCS framework. Similar to the AIR soundness, one needs to 
+%% integrate the degree of the denomiator in the testing bound (leading to slightly tighter testing). Needs to be checked!
+%%
 In both cases one has to limit the number $m$ of simultaneous queries to some maximum value $m_{max}$, satisfying 
 \[
 k+m_{max} < (1-\theta)\cdot n.
@@ -1418,7 +1422,7 @@ For quite large fields $F$ (compared to the block length $|D|=n$) there are line
 In the case of a bounded alphabet, Guruswami \cite{ListDecodingBook} demonstrates binary linear codes which are list decodable to the Zyablow bound $\frac{1-\rho}{H}$ (here, $H$ is the entropy of the code) and uses such codes to construct examples that approach capacity bound, having list size $L=O\left(\frac{1}{\eta}\right)$. 
 
 However, practitioners seem to avoid this conjecture. 
-The ethSTARK documentation \cite{ethSTARK} takes a toy protocol as a representative for the entire DEEP-ALI of AIR,  whereas the plonky2 writeup \cite{PolygonZero} only sketches soundness in the polynomial oracle model, with no reference to list bounds.
+The ethSTARK documentation \cite{ethSTARK} takes a toy protocol as a representative for the entire DEEP-ALI of AIR,  whereas the Plonky2 writeup \cite{PolygonZero} only sketches soundness in the polynomial oracle model, with no reference to list bounds.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
